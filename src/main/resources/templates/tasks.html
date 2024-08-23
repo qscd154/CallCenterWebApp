@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>요청사항 조회</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css">
+
+
+
+</head>
+<body>
+
+<div th:replace="~{/fragments/navbar :: navbar}"></div>
+
+<div class="container mt-4">
+    <h1>요청사항 리스트</h1>
+
+    <form th:action="@{/tasks}" method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-2">
+                <input type="text" name="regDt" class="form-control" placeholder="접수일자(YYYYMMDD)">
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="reqNm" class="form-control" placeholder="요청자">
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="state" class="form-control" placeholder="진행상태">
+            </div>
+            <div class="col-md-2">
+                <input type="text" name="head" class="form-control" placeholder="제목">
+            </div>
+            <div class="col-md-2 mt-2">
+                <button type="submit" class="btn btn-primary">검색</button>
+            </div>
+        </div>
+    </form>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>요청사항 ID</th>
+            <th>접수일자</th>
+            <th>상태</th>
+            <th>요청자</th>
+            <th>제목</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.taskId}">요청사항 ID</td>
+            <td th:text="${task.regDt}">접수일자</td>
+            <td th:text="${task.state}">상태</td>
+            <td th:text="${task.reqNm}">요청자</td>
+            <td th:text="${task.head}">제목</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
